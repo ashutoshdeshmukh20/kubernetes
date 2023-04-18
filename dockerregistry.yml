@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podmynginx1
+spec:
+ imagePullSecrets:
+  - name: mydockerhubsecret
+ containers:
+   - name: mynginxcontainer
+     image: ashutoshdeshmukh2/webserver
+     ports:
+     - containerPort: 80
+     volumeMounts:
+      - name: myconfigvolume
+        mountPath: /etc/nginx/config.d/
+ volumes:
+   - name: myconfigvolume
+     configMap:
+      name: mynginxconf
